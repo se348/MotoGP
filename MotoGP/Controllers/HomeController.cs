@@ -18,6 +18,14 @@ namespace MotoGP.Controllers
             return View();
         }
 
+        public IActionResult Menu()
+        {
+            Random rnd = new Random();
+            int numRand = rnd.Next(1, 5);
+            ViewData["BannerNr."] = numRand;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

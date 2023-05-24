@@ -1,0 +1,15 @@
+﻿@{
+    List<Race> races = (List<Race>)ViewData["Races"]!;
+    ViewData["Title"] = "Races on map";
+}
+
+<img src="/images/banners/map.png" alt="Workplace" usemap="#workmap">
+
+<map name="workmap">
+    @foreach(var race in races)
+    {
+        <a asp-action="ShowRace" asp-controller="Info" asp-route-id="@race.RaceID">
+            <area shape="circle" coords="@(race.X),@(race.Y),44" alt="Cup of coffee">
+        </a>
+    }
+</map>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<div>
+    Thank you for ordering tickets for the race. Your booking is registered on @DateTime.Now.ToShortDateString(). We will send you the tickets ASAP.
+</div>
+
+<div>
+    <a asp-action="Menu" asp-controller="Home">
+        Back
+    </a>
+</div>
