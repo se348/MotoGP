@@ -1,0 +1,56 @@
+﻿@model MotoGP.Models.ViewModel.ListTicketsViewModel
+
+@{
+    ViewData["Title"] = "Ordered Tickets";
+    var selectItems = (IEnumerable<SelectListItem>)Model.Races;
+    var tickets = (IEnumerable<Ticket>)Model.Tickets!;
+}
+
+<form asp-action="ListTickets" method="get">
+    <select asp-items="selectItems" asp-for="raceID" >
+        <option value="0" >--Select a race--</option>
+    </select>
+
+    <input type="submit" value="Filter" />
+</form>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).OrderDate)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Name)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Email)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Address)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Country)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Race)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Number)</th>
+                <th>@Html.DisplayNameFor(a => tickets.ElementAt(0).Paid)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in tickets)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(a => item.OrderDate)</td>
+                    <td>@Html.DisplayFor(a => item.Name)</td>
+                    <td>@Html.DisplayFor(a => item.Email)</td>
+                    <td>@Html.DisplayFor(a => item.Address)</td>
+                    <td>@Html.DisplayFor(a => item.Country.Name)</td>
+                    <td>@Html.DisplayFor(a => item.Race.Name)</td>
+                    <td>@Html.DisplayFor(a => item.Number)</td>
+                    <td>
+                        @if (item.Paid)
+                        {
+                            <span>Paid</span>
+                        }else {
+                            <a asp-action="EditTicket" asp-route-id="@item.TicketID">Pay</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

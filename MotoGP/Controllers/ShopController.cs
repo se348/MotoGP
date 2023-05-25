@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MotoGP.Data;
 using MotoGP.Models;
+using MotoGP.Models.ViewModel;
 
 namespace MotoGP.Controllers
 {
@@ -53,6 +54,29 @@ namespace MotoGP.Controllers
                 .Include(a => a.Race)
                 .FirstOrDefault();
             return View(ticket);
+        }
+    
+        public IActionResult ListTickets(int raceID= 0)
+        {
+            ListTicketsViewModel model = new ListTicketsViewModel();
+            if (raceID > 0)
+            {
+                model.Tickets = gPContext.Tickets
+                    .Include(a => a.Country)
+                    .Include(a => a.Race)
+                    .Where(a => a.RaceID == raceID).ToList();
+            }
+            else
+            {
+                model.Tickets = gPContext.Tickets
+                    .Include(a => a.Country)
+                    .Include(a => a.Race)
+                    .ToList();
+            }
+            model.raceID = raceID;
+            model.Races = new SelectList(gPContext.Races.ToList(), "RaceID", "Name");
+            ViewData["BannerNr."] = 3;
+            return View(model);
         }
     }
 }

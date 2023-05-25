@@ -1,0 +1,25 @@
+﻿@model MotoGP.Models.ViewModel.RaceDetailViewModel
+@{
+    ViewData["Title"] = "Races";
+    var selectList = (IEnumerable<SelectListItem>)Model.Races;
+}
+
+<form method="get" asp-action="SelectRace">
+    <select asp-items="selectList" asp-for="raceID" onchange="this.form.submit()">
+        <option value=0 >--Select a race --</option>
+    </select>
+
+    <div style="display:grid; grid-template-columns:400px 400px">
+        <div>
+            <img src=@($"/images/races/{Model.raceID}.jpg") />
+        </div>
+        <div>
+            <p>@Html.DisplayFor(a => Model.SelectedRace.Name) - @Html.DisplayFor(a => Model.SelectedRace.Country)</p>
+            <p>@Html.DisplayNameFor(a => Model.SelectedRace.Length) @Html.DisplayFor(a => Model.SelectedRace.Length)m</p>
+            <p>@Html.DisplayNameFor(a => Model.SelectedRace.Date) @Html.DisplayFor(a => Model.SelectedRace.Date)</p>
+            <p>
+                @Html.DisplayFor(a => Model.SelectedRace.Description)
+            </p>
+        </div>
+    </div>
+</form>
