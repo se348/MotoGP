@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Riders";
+}
+@model IEnumerable<MotoGP.Models.Rider>
+
+<style>
+    .wrapper{
+        display: grid;
+        grid-template-columns: 300px 300px 300px;
+    }
+    .flexed{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+
+
+<div class="wrapper">
+    @foreach(var item in Model)
+    {
+        <div style="background-color:lightgrey;padding:20px; margin:20px;">
+            <div>
+                <img src="@($"/images/riders/{item.Number}.jpg")" />
+            </div>
+            <div class="flexed">
+                <div>
+                    <img src="@($"/images/flags/{item.Country.CountryID}.png")" />
+                </div>
+                <div>
+                    <h4>@item.Number</h4>
+                </div>
+            </div>
+            <div>
+                <p>@Html.DisplayFor(a => item.Name)</p>
+            </div>
+        </div>
+    }
+</div>
