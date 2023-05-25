@@ -1,9 +1,10 @@
-﻿@{
+﻿@model MotoGP.Models.Ticket
+@{
     ViewData["Title"] = "Confirmation";
 }
 
 <div>
-    Thank you for ordering tickets for the race. Your booking is registered on @DateTime.Now.ToShortDateString(). We will send you the tickets ASAP.
+    Thank you @Html.DisplayFor(a => Model.Name) for ordering tickets for the race in @Html.DisplayFor(a => Model.Country.Name) on @Html.DisplayFor(a => Model.Race.Date). Your booking is registered on @Html.DisplayFor(a => Model.OrderDate). We will send you the @Html.DisplayFor(a => Model.Number) tickets ASAP.
 </div>
 
 <div>

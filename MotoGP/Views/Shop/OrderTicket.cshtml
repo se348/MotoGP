@@ -1,9 +1,55 @@
 ﻿@{
     ViewData["Title"] = ViewData["Header"];
+    var selectList = (IEnumerable<SelectListItem>)ViewData["SelectList"]!;
+    var raceList = (IEnumerable<Race>)ViewData["RacesList"]!;
 }
+@model MotoGP.Models.Ticket
 
 <div>
     Please fill out following fields:
+    <form asp-action="OrderTicket">
+        <div>
+            <label asp-for="Name">@Html.DisplayNameFor(a => Model.Name)</label>
+            <input asp-for="Name"/>
+        </div>
+        <div>
+            <label asp-for="Email">@Html.DisplayNameFor(a => Model.Email)</label>
+            <input asp-for="Email"/>
+        </div>
+
+        <div>
+            <label asp-for="Address">@Html.DisplayNameFor(a => Model.Address)</label>
+            <input asp-for="Address"/>
+        </div>
+
+        <div>
+            <label asp-for="CountryID">@Html.DisplayNameFor(a => Model.Country)</label>
+            <select asp-items="selectList" asp-for="CountryID"></select>
+        </div>
+
+
+        <div>
+            <label asp-for="RaceID">@Html.DisplayNameFor(a => Model.Race)</label>
+            @foreach(var items in raceList)
+            {   <div>
+                    <input type="radio" asp-for="RaceID" value="@items.RaceID" />@Html.DisplayFor(a => items.Name)
+                </div>
+
+            }
+        </div>
+
+
+
+        <div>
+            <label asp-for="Number">@Html.DisplayNameFor(a => Model.Number)</label>
+            @for(int i=1; i <= 6; i++)
+            {
+                <input type="radio" asp-for="Number" value="@i"/>@i
+            }
+        </div>
+        <input type="submit" value="Order" />
+    </form>
+
 
     <div>
         <a asp-action="Menu" asp-controller="Home">
